@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.IO;
 using Filer2_UI_.ViewModels.Pages;
 using Wpf.Ui.Controls;
 
@@ -15,6 +16,7 @@ public partial class DashboardPage : INavigableView<DashboardViewModel>
 	{
 		ViewModel = viewModel;
 		DataContext = this;
+		Directory.CreateDirectory($"{addresNew.Text}\\logs");
 
 		InitializeComponent();
 	}

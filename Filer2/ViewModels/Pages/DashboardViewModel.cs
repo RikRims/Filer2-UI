@@ -2,6 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+using System;
+
 namespace Filer2_UI_.ViewModels.Pages;
 
 public partial class DashboardViewModel : ObservableObject
@@ -13,7 +15,7 @@ public partial class DashboardViewModel : ObservableObject
 	public string _addresStartText = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 	
 	[ObservableProperty]
-	public string _addresEndText = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+	public string _addresEndText = string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "\\Filer2\\", DateTime.Today.ToString().AsSpan(0, 10));
 
 	[RelayCommand]
 	private void OnCounterIncrement()
