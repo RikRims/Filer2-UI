@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="Filer2_UI_.Views.Pages.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Filer2_UI_.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="DashboardPage"
+    d:DataContext="{d:DesignInstance local:DashboardPage, IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+	<Grid VerticalAlignment="Top">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+
+		<Grid>
+
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<StackPanel>
+
+				<TextBlock Text="Выберите путь к файлам (рабочую область):" />
+				<StackPanel Orientation="Horizontal" >
+					<TextBlock x:Name="addresOld" Width="300" Text="{Binding ViewModel.AddresStartText, Mode=OneWay}"/>
+					<ui:Button Content="Выбрать" Margin="5" Command="{Binding ViewModel.AddAddresStartCommand, Mode=OneWay}" ToolTip="путь к файлам с которыми будем работать" />
+				</StackPanel>
+
+				<TextBlock Text="Выберите, куда поместить файлы при перемещении:" TextWrapping="Wrap" />
+				<StackPanel Orientation="Horizontal">
+					<TextBlock x:Name="addresNew" Width="300" Text="{Binding ViewModel.AddresEndText, Mode=OneWay}"/>
+					<ui:Button Content="Выбрать" Margin="5" Command="{Binding ViewModel.AddAddresEndCommand, Mode=OneWay}" ToolTip="куда спрятать эти файлы?"/>
+				</StackPanel>
+
+				<StackPanel Name="Files">
+					<TextBlock Text="Отметте галочкой форматы файлов, которые хотите удалить или переместить." Width="400"/>
+					<StackPanel Name="btn_all" Orientation="Horizontal"></StackPanel>
+					<StackPanel x:Name="CheckBoxConteiner" />
+				</StackPanel>
+
+			</StackPanel>
+
+			<StackPanel Grid.Row="1" Orientation="Horizontal">
+				<ui:Button Content="Сканировать" Margin="10,5,5,5" ToolTip="Сканировать рабочую область"/>
+				<ui:Button Content="Переместить" Margin="5" />
+				<ui:Button Content="Удалить" Margin="5" ToolTip="Удаление может происходить с концами."/>
+			</StackPanel>
+		</Grid>
+
+		<!--<ui:Button
+            Grid.Column="0"
+            Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
+            Content="Click me!"
+            Icon="Fluent24" />
+		<TextBlock
+            Grid.Column="1"
+            Margin="12,0,0,0"
+            VerticalAlignment="Center"
+            Text="{Binding ViewModel.Counter, Mode=OneWay}" />-->
+	</Grid>
+</Page>

@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<ApplicationIcon>wpfui-icon.ico</ApplicationIcon>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>Filer2_UI</RootNamespace>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<Title></Title>
+		<Authors>$(Name)</Authors>
+		<AssemblyVersion>1.0.3.0</AssemblyVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="wpfui-icon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="WPF-UI" Version="3.0.0-preview.4" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1 " />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1 " />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Assets\Docs_all.png" />
+		<None Remove="Assets\Docs_black.png" />
+		<None Remove="Assets\Docs_white.png" />
+		<None Remove="Assets\icons8-каталог-64 (4).png" />
+		<None Remove="Assets\icons8-каталог-64.png" />
+		<None Remove="Assets\icons_V1.png" />
+		<None Remove="Assets\icons_V2.png" />
+		<None Remove="Assets\icons_V3.png" />
+		<None Remove="Assets\wpfui-icon-256.png" />
+		<None Remove="Assets\wpfui-icon-1024.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Assets\Docs_all.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Docs_black.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Docs_white.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\icons8-каталог-64 (4).png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\icons8-каталог-64.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\icons_V1.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\icons_V2.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\icons_V3.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\wpfui-icon-256.png" />
+		<Resource Include="Assets\wpfui-icon-1024.png" />
+	</ItemGroup>
+
+</Project>
