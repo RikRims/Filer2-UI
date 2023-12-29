@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Filer2_UI.Models;
-internal class Files
+public class Files
 {
+	string FilesPath { get; set; }
+
+	CheckBox CheckBox { get; set; }
 }
