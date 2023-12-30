@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 namespace Filer2_UI.Models;
 public class Files
 {
-	private string _startAddres;
+	public string? StartAddres { get; set; }
 	
-	private CheckBox _checkExtension;
+	public string? CheckExtension { get; set; }
 
-	private Image _image;
+	public bool EnableExtension { get; set; } = false;
+
+	public Icon? Img {  get; set; }
 }

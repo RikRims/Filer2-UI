@@ -18,7 +18,7 @@
 	<Grid VerticalAlignment="Top">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
 		<Grid>
@@ -50,21 +50,22 @@
 			</StackPanel>
 
 			<StackPanel Grid.Row="1" Orientation="Horizontal">
-				<ui:Button Content="Сканировать" Margin="10,5,5,5" ToolTip="Сканировать рабочую область"/>
+				<ui:Button Content="Сканировать" Command="{Binding ViewModel.ScanFilesCommand}" Margin="10,5,5,5" ToolTip="Сканировать рабочую область"/>
 				<ui:Button Content="Переместить" Margin="5" />
-				<ui:Button Content="Удалить" Margin="5" ToolTip="Удаление может происходить с концами."/>
+				<ui:Button Content="Удалить" Command="{Binding ViewModel.DeletedFilesCommand}" Margin="5" ToolTip="Удаление может происходить с концами."/>
 			</StackPanel>
 		</Grid>
 
-		<!--<ui:Button
-            Grid.Column="0"
-            Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
-            Content="Click me!"
-            Icon="Fluent24" />
-		<TextBlock
-            Grid.Column="1"
-            Margin="12,0,0,0"
-            VerticalAlignment="Center"
-            Text="{Binding ViewModel.Counter, Mode=OneWay}" />-->
+		<Grid Grid.Column="1">
+			<ListBox ItemsSource="{Binding ViewModel.ListFiles}" SelectedItem="{Binding ViewModel.CheckExtension}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<ListBoxItem>
+							<CheckBox Content="{Binding CheckExtension}" IsChecked="{Binding EnableExtension}"/>
+						</ListBoxItem>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
 	</Grid>
 </Page>

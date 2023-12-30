@@ -3,7 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
+using Filer2_UI.Models;
 
 namespace Filer2_UI_.ViewModels.Pages;
 
@@ -14,6 +16,9 @@ public partial class DashboardViewModel : ObservableObject
 	
 	[ObservableProperty]
 	public string _addresEndText = string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "\\Filer2\\", DateTime.Today.ToString().AsSpan(0, 10));
+
+	[ObservableProperty]
+	public ObservableCollection<Files> _listFiles = new ObservableCollection<Files>();
 
 	[RelayCommand]
 	private void OnAddAddresStart()
@@ -26,6 +31,32 @@ public partial class DashboardViewModel : ObservableObject
 	{
 		AddresEndText = CompleteField();
 	}
+
+	[RelayCommand]
+	private void OnScanFiles()
+	{
+		var files = Directory.EnumerateFiles(AddresStartText).Select(files => new Files 
+		{ 
+			StartAddres = files, 
+			CheckExtension = files[files.LastIndexOf(".")..],
+			Img = Icon.ExtractAssociatedIcon(files)
+		});
+		;
+
+		ListFiles = new ObservableCollection<Files>(files);
+	}
+
+	[RelayCommand]
+	private void OnDeletedFiles()
+	{
+        foreach (var item in ListFiles)
+        {
+			if(item.EnableExtension)
+			{
+				File.Delete(item.StartAddres);
+			}
+        }
+    }
 
 	private static string CompleteField()
 	{
