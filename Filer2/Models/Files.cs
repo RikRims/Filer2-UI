@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace Filer2_UI.Models;
 public class Files
 {
-	string FilesPath { get; set; }
+	private string _startAddres;
+	
+	private CheckBox _checkExtension;
 
-	CheckBox CheckBox { get; set; }
+	private Image _image;
 }

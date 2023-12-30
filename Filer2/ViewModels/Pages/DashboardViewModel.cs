@@ -3,25 +3,17 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 using System;
+using System.IO;
 
 namespace Filer2_UI_.ViewModels.Pages;
 
 public partial class DashboardViewModel : ObservableObject
 {
 	[ObservableProperty]
-	private int _counter = 0;
-
-	[ObservableProperty]
 	public string _addresStartText = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 	
 	[ObservableProperty]
 	public string _addresEndText = string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "\\Filer2\\", DateTime.Today.ToString().AsSpan(0, 10));
-
-	[RelayCommand]
-	private void OnCounterIncrement()
-	{
-		Counter++;
-	}
 
 	[RelayCommand]
 	private void OnAddAddresStart()
@@ -39,10 +31,16 @@ public partial class DashboardViewModel : ObservableObject
 	{
 		try
 		{
-			using var dialog = new System.Windows.Forms.FolderBrowserDialog();
-			System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+			using var dialog = new FolderBrowserDialog();
+			DialogResult result = dialog.ShowDialog();
 			return dialog.SelectedPath;
 		}
 		catch(Exception ex) { return ex.Message; }
+	}
+
+	public void WorkPreraration()
+	{
+		Directory.CreateDirectory(AddresEndText);
+		Directory.CreateDirectory(string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "\\Filer2\\", "Logs"));
 	}
 }
