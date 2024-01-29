@@ -19,5 +19,6 @@ public partial class DashboardPage : INavigableView<DashboardViewModel>
 		//Directory.CreateDirectory($"{addresNew.Text}\\logs");
 
 		InitializeComponent();
+		ViewModel.WorkPreraration();
 	}
 }
