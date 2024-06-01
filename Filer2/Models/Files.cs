@@ -1,11 +1,31 @@
 ﻿namespace Filer2_UI_.Models;
-public class Files
+public class Files : ObservableObject
 {
-	public string? StartAddres { get; set; }
-	
-	public string? CheckExtension { get; set; }
+	private string? _startAddres;
+    public string? StartAddres 
+	{ 
+		get => _startAddres; 
+		set => SetProperty(ref _startAddres, value); 
+	}
 
-	public bool EnableExtension { get; set; } = false;
+	private string? _checkExtension;
+    public string? CheckExtension 
+	{ 
+		get => _checkExtension; 
+		set => SetProperty(ref _checkExtension, value); 
+	}
 
-	public Icon? Img {  get; set; }
+    private bool _extension = false;
+	public bool EnableExtension
+    {
+        get => _extension;
+        set => SetProperty(ref _extension, value);
+    }
+
+    private Icon? _icon;
+    public Icon? Img
+    {
+        get => _icon;
+        set => SetProperty(ref _icon, value);
+    }
 }
