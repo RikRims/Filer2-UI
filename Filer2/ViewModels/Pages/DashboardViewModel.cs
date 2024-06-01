@@ -4,6 +4,7 @@
 // All Rights Reserved.
 using System.Collections.ObjectModel;
 using System.IO;
+using Filer2_UI.ViewModels.Base;
 using Filer2_UI_.Models;
 
 namespace Filer2_UI_.ViewModels.Pages;
@@ -50,6 +51,7 @@ public partial class DashboardViewModel : ObservableObject
 			if(!item.EnableExtension)
 			{
 				item.EnableExtension = true;
+				OnPropertyChanged();
 			}
 		}
 	}
@@ -62,6 +64,7 @@ public partial class DashboardViewModel : ObservableObject
             if(item.EnableExtension)
             {
                 item.EnableExtension = false;
+                OnPropertyChanged();
             }
         }
     }
