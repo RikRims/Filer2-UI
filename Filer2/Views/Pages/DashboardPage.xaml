@@ -51,7 +51,7 @@
 
 			<StackPanel Grid.Row="1" Orientation="Horizontal">
 				<ui:Button Content="Сканировать" Command="{Binding ViewModel.ScanFilesCommand}" Margin="10,5,5,5" ToolTip="Сканировать рабочую область."/>
-				<ui:Button Content="Переместить" Margin="5" />
+				<ui:Button Content="Переместить" Command="{Binding ViewModel.TransferFilesCommand}" Margin="5" />
 				<ui:Button Content="Удалить" Command="{Binding ViewModel.DeletedFilesCommand}" Margin="5" ToolTip="Удаление может происходить с концами."/>
 			</StackPanel>
 		</Grid>

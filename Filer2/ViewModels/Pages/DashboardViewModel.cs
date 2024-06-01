@@ -72,6 +72,7 @@ public partial class DashboardViewModel : ObservableObject
 	{
 		var filteredFiles = Directory.GetFiles(AddresStartText, "*.*").Where(file => !_block.Any<string>((extension) => file.EndsWith(extension, StringComparison.CurrentCultureIgnoreCase))).Select(file => new Files
 		{
+			Name = $"{file[file.LastIndexOf("\\")..]}",
 			StartAddres = file,
 			CheckExtension = $"{ file[file.LastIndexOf(".")..] }",
 			Img = Icon.ExtractAssociatedIcon(file)
@@ -80,6 +81,20 @@ public partial class DashboardViewModel : ObservableObject
 		ListFiles = new ObservableCollection<Files>(filteredFiles);
 	}
 
+	[RelayCommand]
+	private void OnTransferFiles()
+	{
+		foreach(var item in ListFiles)
+		{
+			if(item.EnableExtension)
+			{
+				if(!Equals(AddresEndText))
+				{
+					File.Move(item.StartAddres, _addresEndText + item.Name);
+				}
+			}
+		}
+	}
 	[RelayCommand]
 	private void OnDeletedFiles()
 	{

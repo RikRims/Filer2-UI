@@ -1,6 +1,13 @@
 ﻿namespace Filer2_UI_.Models;
 public class Files : ObservableObject
 {
+    private string? _name;
+    public string? Name
+    {
+        get => _name;
+        set => SetProperty(ref _name, value);
+    }
+
 	private string? _startAddres;
     public string? StartAddres 
 	{ 
