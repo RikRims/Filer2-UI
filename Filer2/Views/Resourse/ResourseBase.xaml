@@ -1,7 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
-	
+
+	<Style TargetType="Window">
+		<Setter Property="MinWidth" Value="350"/>
+		<Setter Property="MinHeight" Value="700"/>
+	</Style>
 	<Style TargetType="TextBlock">
 		<Setter Property="Margin" Value="10"/>
 		<Setter Property="TextWrapping" Value="Wrap"/>

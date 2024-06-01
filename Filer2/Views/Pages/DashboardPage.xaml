@@ -6,10 +6,11 @@
     xmlns:local="clr-namespace:Filer2_UI_.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+	xmlns:models="clr-namespace:Filer2_UI_.Models"
     Title="DashboardPage"
     d:DataContext="{d:DesignInstance local:DashboardPage, IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="330"
+    d:DesignWidth="700"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -21,8 +22,7 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<Grid>
-
+		<Grid >
 			<Grid.RowDefinitions>
 				<RowDefinition />
 				<RowDefinition Height="auto"/>
@@ -50,22 +50,29 @@
 			</StackPanel>
 
 			<StackPanel Grid.Row="1" Orientation="Horizontal">
-				<ui:Button Content="Сканировать" Command="{Binding ViewModel.ScanFilesCommand}" Margin="10,5,5,5" ToolTip="Сканировать рабочую область"/>
+				<ui:Button Content="Сканировать" Command="{Binding ViewModel.ScanFilesCommand}" Margin="10,5,5,5" ToolTip="Сканировать рабочую область."/>
 				<ui:Button Content="Переместить" Margin="5" />
 				<ui:Button Content="Удалить" Command="{Binding ViewModel.DeletedFilesCommand}" Margin="5" ToolTip="Удаление может происходить с концами."/>
 			</StackPanel>
 		</Grid>
 
-		<Grid Grid.Column="1">
-			<ListBox ItemsSource="{Binding ViewModel.ListFiles}" SelectedItem="{Binding ViewModel.CheckExtension}">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<ListBoxItem>
+		<Grid Grid.ColumnSpan="2" Height="310" Margin="450,0,0,0" VerticalAlignment="Top">
+			<StackPanel Orientation="Vertical">
+				<StackPanel Orientation="Horizontal">
+					<ui:Button Content="Выделить всё" Command="{Binding ViewModel.ToSelectAllCommand}" Margin="10,5,5,5" ToolTip="Выделить всё."/>
+					<ui:Button Content="Развыделить всё" Command="{Binding ViewModel.DeselectAllCommand}" Margin="10,5,5,5" ToolTip="Снять выделение."/>
+				</StackPanel>
+				<ui:VirtualizingItemsControl
+				Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+				ItemsSource="{Binding ViewModel.ListFiles, Mode=OneWay}"
+				VirtualizingPanel.CacheLengthUnit="Item" Height="309" VerticalAlignment="Top">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate DataType="{x:Type models:Files}">
 							<CheckBox Content="{Binding CheckExtension}" IsChecked="{Binding EnableExtension}"/>
-						</ListBoxItem>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ui:VirtualizingItemsControl>
+			</StackPanel>
 		</Grid>
 	</Grid>
 </Page>

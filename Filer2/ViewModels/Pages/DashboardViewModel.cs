@@ -2,11 +2,9 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows.Shapes;
-using Filer2_UI.Models;
+using Filer2_UI_.Models;
 
 namespace Filer2_UI_.ViewModels.Pages;
 
@@ -45,6 +43,30 @@ public partial class DashboardViewModel : ObservableObject
 	}
 
 	[RelayCommand]
+	private void OnToSelectAll()
+	{
+		foreach(var item in ListFiles)
+		{
+			if(!item.EnableExtension)
+			{
+				item.EnableExtension = true;
+			}
+		}
+	}
+
+	[RelayCommand]
+    private void OnDeselectAll()
+    {
+        foreach(var item in ListFiles)
+        {
+            if(item.EnableExtension)
+            {
+                item.EnableExtension = false;
+            }
+        }
+    }
+
+    [RelayCommand]
 	private void OnScanFiles()
 	{
 		var filteredFiles = Directory.GetFiles(AddresStartText, "*.*").Where(file => !_block.Any<string>((extension) => file.EndsWith(extension, StringComparison.CurrentCultureIgnoreCase))).Select(file => new Files
