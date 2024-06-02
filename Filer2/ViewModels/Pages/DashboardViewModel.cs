@@ -21,17 +21,17 @@ public partial class DashboardViewModel : ObservableObject
 	});
     #endregion
 
-    #region свойства
+    #region Поля
     [ObservableProperty]
-	public string _addresStartText = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+	private string _addresStartText = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 	[ObservableProperty]
-	public string _addresEndText = string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "\\Filer2\\", DateTime.Today.ToString().AsSpan(0, 10));
+	private string _addresEndText = string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "\\Filer2\\", DateTime.Today.ToString().AsSpan(0, 10));
 
 	[ObservableProperty]
-	public ObservableCollection<Files> _listFiles = new ObservableCollection<Files>();
+	private ObservableCollection<Files> _listFiles = new ObservableCollection<Files>();
 
-    ObservableCollection<Files> _listFilesToDelete = new ObservableCollection<Files>();
+	private ObservableCollection<Files> _listFilesToDelete = new ObservableCollection<Files>();
     #endregion
 
     #region Команды
