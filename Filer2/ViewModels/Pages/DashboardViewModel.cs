@@ -93,7 +93,9 @@ public partial class DashboardViewModel : ObservableObject
 			StartAddres = file,
 			CheckExtension = $"{ file[file.LastIndexOf(".")..] }",
 			Img = Icon.ExtractAssociatedIcon(file)
-		});
+			// О мой друга, в строке ниже я навертел делов, так что тебе тут нужно будет разгребать!
+			// TODO ty DO to DU сделай отдельно для вывода на вьюху коллекцию стрингов, а тут убери груп, ибо он нужен только для коллекции списка расширений (без повторений)
+		}).GroupBy(x => x.CheckExtension).Select(c => c.First());
 
 		ListFiles = new ObservableCollection<Files>(filteredFiles);
 	}
