@@ -9,8 +9,6 @@
 	xmlns:models="clr-namespace:Filer2_UI_.Models"
     Title="DashboardPage"
     d:DataContext="{d:DesignInstance local:DashboardPage, IsDesignTimeCreatable=False}"
-    d:DesignHeight="330"
-    d:DesignWidth="700"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -56,7 +54,7 @@
 			</StackPanel>
 		</Grid>
 
-		<Grid Grid.ColumnSpan="2" Height="310" Margin="450,0,0,0" VerticalAlignment="Top">
+		<Grid Grid.ColumnSpan="2" Margin="450,0,0,0" VerticalAlignment="Top">
 			<StackPanel Orientation="Vertical">
 				<StackPanel Orientation="Horizontal">
 					<ui:Button Content="Выделить всё" Command="{Binding ViewModel.ToSelectAllCommand}" Margin="10,5,5,5" ToolTip="Выделить всё."/>
@@ -64,7 +62,7 @@
 				</StackPanel>
 				<ui:VirtualizingItemsControl
 				Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-				ItemsSource="{Binding ViewModel.ListFiles, Mode=OneWay}"
+				ItemsSource="{Binding ViewModel.ListCeckboxs, Mode=OneWay}"
 				VirtualizingPanel.CacheLengthUnit="Item" Height="309" VerticalAlignment="Top">
 					<ItemsControl.ItemTemplate>
 						<DataTemplate DataType="{x:Type models:Files}">

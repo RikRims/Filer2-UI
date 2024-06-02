@@ -5,6 +5,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using Filer2_UI.Models;
 using Filer2_UI_.Models;
 
 namespace Filer2_UI_.ViewModels.Pages;
@@ -30,8 +31,9 @@ public partial class DashboardViewModel : ObservableObject
 
 	[ObservableProperty]
 	private ObservableCollection<Files> _listFiles = new ObservableCollection<Files>();
-
-	private ObservableCollection<Files> _listFilesToDelete = new ObservableCollection<Files>();
+    
+	[ObservableProperty]
+    private ObservableCollection<Extention> _listCeckboxs = new ObservableCollection<Extention>();
     #endregion
 
     #region Команды
@@ -89,19 +91,21 @@ public partial class DashboardViewModel : ObservableObject
     [RelayCommand]
 	private void OnScanFiles()
 	{
-		var filteredFiles = Directory.GetFiles(AddresStartText, "*.*").Where(file => !_block.Any<string>((extension) => file.EndsWith(extension, StringComparison.CurrentCultureIgnoreCase))).Select(file => new Files
+        var filteredFiles = Directory.GetFiles(AddresStartText, "*.*").Where(file => !_block.Any<string>((extension) => file.EndsWith(extension, StringComparison.CurrentCultureIgnoreCase))).Select(file => new Files
+        {
+            Name = $"{file[file.LastIndexOf("\\")..]}",
+            StartAddres = file,
+            CheckExtension = $"{file[file.LastIndexOf(".")..]}",
+            Img = Icon.ExtractAssociatedIcon(file)
+         });
+
+        var filteredFilesCheckBox = Directory.GetFiles(AddresStartText, "*.*").Where(file => !_block.Any<string>((extension) => file.EndsWith(extension, StringComparison.CurrentCultureIgnoreCase))).Select(file => new Extention
 		{
-			Name = $"{file[file.LastIndexOf("\\")..]}",
-			StartAddres = file,
 			CheckExtension = $"{file[file.LastIndexOf(".")..]}",
-			Img = Icon.ExtractAssociatedIcon(file)
-			// О мой друга, в строке ниже я навертел делов, так что тебе тут нужно будет разгребать!
-			// TODO ty DO to DU сделай отдельно для вывода на вьюху коллекцию стрингов, а тут убери груп, ибо он нужен только для коллекции списка расширений (без повторений)
-		});/*.GroupBy(x => x.CheckExtension).Select(c => c.First());*/
-
-        _listFilesToDelete = new ObservableCollection<Files>(filteredFiles);
-
-        ListFiles = new ObservableCollection<Files>(filteredFiles.GroupBy(x => x.CheckExtension).Select(c => c.First()));
+		}).GroupBy(x => x.CheckExtension).Select(c => c.First());
+        
+		ListCeckboxs = new ObservableCollection<Extention>(filteredFilesCheckBox);
+        ListFiles = new ObservableCollection<Files>(filteredFiles);
 		
 	}
 
@@ -117,7 +121,7 @@ public partial class DashboardViewModel : ObservableObject
 			{
 				if(!Equals(AddresEndText))
 				{
-					File.Move(item.StartAddres, _addresEndText + item.Name);
+					File.Move(item.StartAddres, AddresEndText + item.Name);
 				}
 			}
 		}
@@ -129,7 +133,7 @@ public partial class DashboardViewModel : ObservableObject
 	[RelayCommand]
 	private void OnDeletedFiles()
 	{
-		foreach (var item in _listFilesToDelete.Where(x => x.EnableExtension && x.StartAddres != null))
+		foreach (var item in ListFiles.Where(x => x.EnableExtension && x.StartAddres != null))
 		{
             File.Delete(item.StartAddres);
         }
