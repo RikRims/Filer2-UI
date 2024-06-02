@@ -30,13 +30,15 @@ public partial class DashboardViewModel : ObservableObject
 
 	[ObservableProperty]
 	public ObservableCollection<Files> _listFiles = new ObservableCollection<Files>();
-	#endregion
 
-	#region Команды
-	/// <summary>
-	/// Установка начальной папки
-	/// </summary>
-	[RelayCommand]
+    ObservableCollection<Files> _listFilesToDelete = new ObservableCollection<Files>();
+    #endregion
+
+    #region Команды
+    /// <summary>
+    /// Установка начальной папки
+    /// </summary>
+    [RelayCommand]
 	private void OnAddAddresStart()
 	{
 		AddresStartText = CompleteField();
@@ -91,13 +93,16 @@ public partial class DashboardViewModel : ObservableObject
 		{
 			Name = $"{file[file.LastIndexOf("\\")..]}",
 			StartAddres = file,
-			CheckExtension = $"{ file[file.LastIndexOf(".")..] }",
+			CheckExtension = $"{file[file.LastIndexOf(".")..]}",
 			Img = Icon.ExtractAssociatedIcon(file)
 			// О мой друга, в строке ниже я навертел делов, так что тебе тут нужно будет разгребать!
 			// TODO ty DO to DU сделай отдельно для вывода на вьюху коллекцию стрингов, а тут убери груп, ибо он нужен только для коллекции списка расширений (без повторений)
-		}).GroupBy(x => x.CheckExtension).Select(c => c.First());
+		});/*.GroupBy(x => x.CheckExtension).Select(c => c.First());*/
 
-		ListFiles = new ObservableCollection<Files>(filteredFiles);
+        _listFilesToDelete = new ObservableCollection<Files>(filteredFiles);
+
+        ListFiles = new ObservableCollection<Files>(filteredFiles.GroupBy(x => x.CheckExtension).Select(c => c.First()));
+		
 	}
 
 	/// <summary>
@@ -124,16 +129,21 @@ public partial class DashboardViewModel : ObservableObject
 	[RelayCommand]
 	private void OnDeletedFiles()
 	{
-		foreach(var item in ListFiles)
+		foreach (var item in _listFilesToDelete.Where(x => x.EnableExtension && x.StartAddres != null))
 		{
-			if(item.EnableExtension)
-			{
-				if(item.StartAddres!=null)
-				{
-					File.Delete(item.StartAddres);
-				}
-			}
-		}
+            File.Delete(item.StartAddres);
+        }
+
+		//foreach(var item in ListFiles)
+		//{
+		//	if(item.EnableExtension)
+		//	{
+		//		if(item.StartAddres!=null)
+		//		{
+		//			File.Delete(item.StartAddres);
+		//		}
+		//	}
+		//}
 	}
 
 	/// <summary>
