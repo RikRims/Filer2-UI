@@ -4,6 +4,9 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Controls;
+using static System.Reflection.Assembly;
+using static Wpf.Ui.Appearance.Theme;
+using static Wpf.Ui.Appearance.ThemeType;
 
 namespace Filer2_UI.ViewModels.Pages;
 public partial class SettingsViewModel : ObservableObject, INavigationAware
@@ -17,7 +20,10 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 	private string _appName = String.Empty;
 
 	[ObservableProperty]
-	private Wpf.Ui.Appearance.ThemeType _currentTheme = Wpf.Ui.Appearance.ThemeType.Unknown;
+	private static bool _deleted = false;
+
+	[ObservableProperty]
+    private Wpf.Ui.Appearance.ThemeType _currentTheme = Unknown;
 
 	public void OnNavigatedTo()
 	{
@@ -29,23 +35,17 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
 	private void InitializeViewModel()
 	{
-		CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
+		CurrentTheme = GetAppTheme();
 		AppVersion = $"{GetAssemblyName()} - {GetAssemblyVersion()}";
 
 		_isInitialized = true;
 	}
 
-	private string GetAssemblyVersion()
-	{
-		return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-			?? String.Empty;
-	}
+	public static bool GetSetting() => _deleted;
+	
+	private string GetAssemblyVersion() => GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
 
-    public static string GetAssemblyName()
-    {
-        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Name?.ToString()
-            ?? String.Empty;
-    }
+	public static string GetAssemblyName() => GetExecutingAssembly().GetName().Name?.ToString() ?? String.Empty;
 
     [RelayCommand]
 	private void OnChangeTheme(string parameter)
@@ -53,20 +53,20 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 		switch(parameter)
 		{
 			case "theme_light":
-				if(CurrentTheme == Wpf.Ui.Appearance.ThemeType.Light)
+				if(CurrentTheme == Light)
 					break;
 
-				Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Light);
-				CurrentTheme = Wpf.Ui.Appearance.ThemeType.Light;
+                Apply(Light);
+				CurrentTheme = Light;
 
 				break;
 
 			default:
-				if(CurrentTheme == Wpf.Ui.Appearance.ThemeType.Dark)
+				if(CurrentTheme == Dark)
 					break;
 
-				Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Dark);
-				CurrentTheme = Wpf.Ui.Appearance.ThemeType.Dark;
+                Apply(Dark);
+				CurrentTheme = Dark;
 
 				break;
 		}

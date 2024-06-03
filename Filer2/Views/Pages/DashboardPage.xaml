@@ -46,7 +46,7 @@
 				</StackPanel>
 
 			</StackPanel>
-
+			
 			<StackPanel Grid.Row="1" Orientation="Horizontal">
 				<ui:Button Content="Сканировать" Command="{Binding ViewModel.ScanFilesCommand}" Margin="10,5,5,5" ToolTip="Сканировать рабочую область."/>
 				<ui:Button Content="Переместить" Command="{Binding ViewModel.TransferFilesCommand}" Margin="5" />
