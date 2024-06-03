@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
+using Filer2_UI.ViewModels.Pages;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 
@@ -11,7 +12,7 @@ namespace Filer2_UI.ViewModels.Windows;
 public partial class MainWindowViewModel : ObservableObject
 {
 	[ObservableProperty]
-	private string _applicationTitle = "WPF UI - Filer2_UI_";
+	private string _applicationTitle = SettingsViewModel.GetAssemblyName();
 
 	[ObservableProperty]
 	private ObservableCollection<object> _menuItems = new()

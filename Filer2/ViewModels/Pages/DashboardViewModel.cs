@@ -32,7 +32,9 @@ public partial class DashboardViewModel : ObservableObject
 
 	[ObservableProperty]
 	private ObservableCollection<Extentions> _listCeckboxs = new ObservableCollection<Extentions>();
-	#endregion
+    #endregion
+
+    //FileSystem.DeleteFile(@_file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
 
 	#region Команды
 	// Установка начальной папки

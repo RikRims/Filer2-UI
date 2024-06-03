@@ -14,6 +14,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 	private string _appVersion = String.Empty;
 
 	[ObservableProperty]
+	private string _appName = String.Empty;
+
+	[ObservableProperty]
 	private Wpf.Ui.Appearance.ThemeType _currentTheme = Wpf.Ui.Appearance.ThemeType.Unknown;
 
 	public void OnNavigatedTo()
@@ -27,7 +30,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 	private void InitializeViewModel()
 	{
 		CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
-		AppVersion = $"Filer2_UI_ - {GetAssemblyVersion()}";
+		AppVersion = $"{GetAssemblyName()} - {GetAssemblyVersion()}";
 
 		_isInitialized = true;
 	}
@@ -38,7 +41,13 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 			?? String.Empty;
 	}
 
-	[RelayCommand]
+    public static string GetAssemblyName()
+    {
+        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Name?.ToString()
+            ?? String.Empty;
+    }
+
+    [RelayCommand]
 	private void OnChangeTheme(string parameter)
 	{
 		switch(parameter)
