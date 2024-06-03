@@ -6,7 +6,7 @@
 using System.Windows.Media;
 using Brush = System.Windows.Media.Brush;
 
-namespace Filer2_UI_.Models;
+namespace Filer2_UI.Models;
 public struct DataColor
 {
 	public Brush Color { get; set; }

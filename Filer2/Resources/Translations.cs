@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Filer2_UI_.Resources;
+namespace Filer2_UI.Resources;
 
 public partial class Translations
 {

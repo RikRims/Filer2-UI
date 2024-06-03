@@ -1,6 +1,6 @@
 ﻿namespace Filer2_UI.Models;
 
-public class Extention : ObservableObject
+public partial class Extentions : ObservableObject
 {
     // Расширение файла
     private string? _checkExtension;

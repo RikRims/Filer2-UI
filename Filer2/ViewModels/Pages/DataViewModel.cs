@@ -4,11 +4,11 @@
 // All Rights Reserved.
 
 using System.Windows.Media;
-using Filer2_UI_.Models;
+using Filer2_UI.Models;
 using Wpf.Ui.Controls;
 using Color = System.Windows.Media.Color;
 
-namespace Filer2_UI_.ViewModels.Pages;
+namespace Filer2_UI.ViewModels.Pages;
 public partial class DataViewModel : ObservableObject, INavigationAware
 {
 	private bool _isInitialized = false;

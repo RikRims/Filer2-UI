@@ -3,10 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Filer2_UI_.ViewModels.Pages;
+using Filer2_UI.ViewModels.Pages;
 using Wpf.Ui.Controls;
 
-namespace Filer2_UI_.Views.Pages;
+namespace Filer2_UI.Views.Pages;
 public partial class DataPage : INavigableView<DataViewModel>
 {
 	public DataViewModel ViewModel { get; }

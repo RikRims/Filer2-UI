@@ -5,7 +5,7 @@
 
 using Wpf.Ui.Controls;
 
-namespace Filer2_UI_.ViewModels.Pages;
+namespace Filer2_UI.ViewModels.Pages;
 public partial class SettingsViewModel : ObservableObject, INavigationAware
 {
 	private bool _isInitialized = false;

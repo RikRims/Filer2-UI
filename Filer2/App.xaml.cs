@@ -6,16 +6,16 @@
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
-using Filer2_UI_.Services;
-using Filer2_UI_.ViewModels.Pages;
-using Filer2_UI_.ViewModels.Windows;
-using Filer2_UI_.Views.Pages;
-using Filer2_UI_.Views.Windows;
+using Filer2_UI.Services;
+using Filer2_UI.ViewModels.Pages;
+using Filer2_UI.ViewModels.Windows;
+using Filer2_UI.Views.Pages;
+using Filer2_UI.Views.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Filer2_UI_;
+namespace Filer2_UI;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
