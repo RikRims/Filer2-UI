@@ -1,12 +1,12 @@
 ﻿<Page
-    x:Class="Filer2_UI_.Views.Pages.DashboardPage"
+    x:Class="Filer2_UI.Views.Pages.DashboardPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Filer2_UI_.Views.Pages"
+    xmlns:local="clr-namespace:Filer2_UI.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-	xmlns:models="clr-namespace:Filer2_UI_.Models"
+	xmlns:models="clr-namespace:Filer2_UI.Models"
     Title="DashboardPage"
     d:DataContext="{d:DesignInstance local:DashboardPage, IsDesignTimeCreatable=False}"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -65,7 +65,7 @@
 				ItemsSource="{Binding ViewModel.ListCeckboxs, Mode=OneWay}"
 				VirtualizingPanel.CacheLengthUnit="Item" Height="309" VerticalAlignment="Top">
 					<ItemsControl.ItemTemplate>
-						<DataTemplate DataType="{x:Type models:Files}">
+						<DataTemplate DataType="{x:Type models:Extentions}">
 							<CheckBox Content="{Binding CheckExtension}" IsChecked="{Binding EnableExtension}"/>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>

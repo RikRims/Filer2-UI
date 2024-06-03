@@ -3,13 +3,13 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Filer2_UI_.Views.Pages;
-using Filer2_UI_.Views.Windows;
+using Filer2_UI.Views.Pages;
+using Filer2_UI.Views.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Application = System.Windows.Application;
 
-namespace Filer2_UI_.Services;
+namespace Filer2_UI.Services;
 /// <summary>
 /// Managed host of the application.
 /// </summary>

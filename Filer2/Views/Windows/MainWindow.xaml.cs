@@ -3,10 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Filer2_UI_.ViewModels.Windows;
+using Filer2_UI.ViewModels.Windows;
 using Wpf.Ui.Controls;
 
-namespace Filer2_UI_.Views.Windows;
+namespace Filer2_UI.Views.Windows;
 public partial class MainWindow
 {
 	public MainWindowViewModel ViewModel { get; }

@@ -1,7 +1,7 @@
 ﻿using Filer2_UI.Models;
 
-namespace Filer2_UI_.Models;
-public class Files : Extention
+namespace Filer2_UI.Models;
+public class Files : Extentions
 {
     // Имя файла со слешами в начале
     private string? _name;

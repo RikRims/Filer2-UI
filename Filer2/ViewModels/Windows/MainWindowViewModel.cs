@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 
-namespace Filer2_UI_.ViewModels.Windows;
+namespace Filer2_UI.ViewModels.Windows;
 public partial class MainWindowViewModel : ObservableObject
 {
 	[ObservableProperty]
