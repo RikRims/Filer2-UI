@@ -5,6 +5,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using Filer2_UI.Models;
+using Microsoft.VisualBasic.FileIO;
 
 namespace Filer2_UI.ViewModels.Pages;
 
@@ -34,9 +35,7 @@ public partial class DashboardViewModel : ObservableObject
 	private ObservableCollection<Extentions> _listCeckboxs = new ObservableCollection<Extentions>();
     #endregion
 
-    //FileSystem.DeleteFile(@_file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-
-	#region Команды
+    #region Команды
 	// Установка начальной папки
 	[RelayCommand]
 	private void OnAddAddresStart()
@@ -74,7 +73,7 @@ public partial class DashboardViewModel : ObservableObject
 	// Обработчик сканировыания файлов в стартовой папке исключая файлы из списка _bloxk
 	[RelayCommand]
 	private void OnScanFiles()
-	{
+	{ 
 		var filteredFiles = Directory.GetFiles(AddresStartText, "*.*").Where(file => !_block.Any<string>((extension) => file.EndsWith(extension, StringComparison.CurrentCultureIgnoreCase))).Select(file => new Files
 		{
 			Name = $"{file[file.LastIndexOf("\\")..]}",
@@ -88,13 +87,12 @@ public partial class DashboardViewModel : ObservableObject
 			CheckExtension = $"{file[file.LastIndexOf(".")..]}",
 		}).GroupBy(x => x.CheckExtension).Select(c => c.First());
 
-		ListCeckboxs = new ObservableCollection<Extentions>(filteredFilesCheckBox);
-		ListFiles = new ObservableCollection<Files>(filteredFiles);
+        ListCeckboxs = new ObservableCollection<Extentions>(filteredFilesCheckBox);
+        ListFiles = new ObservableCollection<Files>(filteredFiles);
+    }
 
-	}
-
-	// Обработчик перемещения файлов
-	[RelayCommand]
+    // Обработчик перемещения файлов
+    [RelayCommand]
 	private void OnTransferFiles()
 	{
 		ImportCheckd();
@@ -111,9 +109,12 @@ public partial class DashboardViewModel : ObservableObject
 	{
 		ImportCheckd();
 		foreach(var item in ListFiles.Where(x => x.EnableExtension && x.StartAddres != null))
-		{
-			File.Delete(item.StartAddres);
-		}
+        {
+            if(SettingsViewModel.GetSetting())
+                File.Delete(item.StartAddres);
+			else
+                FileSystem.DeleteFile(item.StartAddres, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+        }
 		OnScanFiles();
 	}
 
