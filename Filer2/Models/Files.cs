@@ -1,6 +1,4 @@
-﻿using Filer2_UI.Models;
-
-namespace Filer2_UI.Models;
+﻿namespace Filer2_UI.Models;
 public class Files : Extentions
 {
     // Имя файла со слешами в начале
@@ -25,5 +23,13 @@ public class Files : Extentions
     {
         get => _icon;
         set => SetProperty(ref _icon, value);
+    }
+
+    public Files(string pathName) : base(pathName)
+    {
+        Name = $"{pathName[pathName.LastIndexOf("\\")..]}";
+        StartAddres = pathName;
+        CheckExtension = $"{pathName[pathName.LastIndexOf(".")..]}";
+        Img = Icon.ExtractAssociatedIcon(pathName);
     }
 }

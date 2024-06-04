@@ -40,9 +40,9 @@
             Content="Dark"
             GroupName="themeSelect"
             IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
-		<TextBlock Margin="10,5,5,5" Text="Deleted" />
+		<TextBlock Margin="0,5,5,5" Text="Deleted" />
 		<CheckBox
-            Content="Удалять насмерть!" Margin="10,5,5,5" IsChecked="{Binding ViewModel.Deleted}" />
+            Content="Удалять насмерть!" Margin="0,5,5,5" IsChecked="{Binding ViewModel.Deleted}" />
 
 		<TextBlock
             Margin="0,24,0,0"

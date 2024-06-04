@@ -17,5 +17,10 @@ public partial class Extentions : ObservableObject
         get => _extension;
         set => SetProperty(ref _extension, value);
     }
+    
+    public Extentions(string pathName)
+    {
+        CheckExtension = $"{pathName[pathName.LastIndexOf(".")..]}";
+    }
 }
 
