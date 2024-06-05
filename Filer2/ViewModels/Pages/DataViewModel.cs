@@ -3,10 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Media;
-using Filer2_UI.Models;
+using Filer2_UI.Services;
 using Wpf.Ui.Controls;
-using Color = System.Windows.Media.Color;
 
 namespace Filer2_UI.ViewModels.Pages;
 public partial class DataViewModel : ObservableObject, INavigationAware
@@ -14,7 +12,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
 	private bool _isInitialized = false;
 
 	[ObservableProperty]
-	private IEnumerable<DataColor>? _colors;
+	private string? _logText;
 
 	public void OnNavigatedTo()
 	{
@@ -26,26 +24,8 @@ public partial class DataViewModel : ObservableObject, INavigationAware
 
 	private void InitializeViewModel()
 	{
-		var random = new Random();
-		var colorCollection = new List<DataColor>();
-
-		for(int i = 0; i < 8192; i++)
-			colorCollection.Add(
-				new DataColor
-				{
-					Color = new SolidColorBrush(
-						Color.FromArgb(
-							(byte)200,
-							(byte)random.Next(0, 250),
-							(byte)random.Next(0, 250),
-							(byte)random.Next(0, 250)
-						)
-					)
-				}
-			);
-
-		Colors = colorCollection;
-
+		LogText = Log.GetLog(DashboardViewModel.PathDirectoryLog);
+		
 		_isInitialized = true;
 	}
 }

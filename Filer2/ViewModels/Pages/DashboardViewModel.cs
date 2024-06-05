@@ -19,7 +19,7 @@ public partial class DashboardViewModel : ObservableObject
 	[ObservableProperty]
 	private string _addresEndText = string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "\\Filer2\\", DateTime.Today.ToString().AsSpan(0, 10));
 
-	private string _pathDirectoryLog = string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "\\Filer2\\", 
+	public static string PathDirectoryLog = string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "\\Filer2\\", 
 		DateTime.Today.ToString().AsSpan(0, 10)) + "\\Logs";
 
     [ObservableProperty]
@@ -35,7 +35,7 @@ public partial class DashboardViewModel : ObservableObject
 	private void OnAddAddresStart()
 	{
 		AddresStartText = CompleteField(); //TODO обработать возврат пустой строки
-		Log.LogAdd(_pathDirectoryLog, DateTime.Now.ToString() + " => Поменяли -AddresStartText- на : " + AddresStartText);
+		Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Поменяли -AddresStartText- на : " + AddresStartText);
 	}
 
 	// Установка конечной папки
@@ -43,7 +43,7 @@ public partial class DashboardViewModel : ObservableObject
 	private void OnAddAddresEnd()
 	{
 		AddresEndText = CompleteField(); //TODO обработать возврат пустой строки
-        Log.LogAdd(_pathDirectoryLog, DateTime.Now.ToString() + " => Поменяли -AddresEndText- на : " + AddresEndText);
+        Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Поменяли -AddresEndText- на : " + AddresEndText);
     }
 
 	// Обработчик выбора всех файлов
@@ -72,12 +72,12 @@ public partial class DashboardViewModel : ObservableObject
 	{
 		var files = ServiceFiles.GetFilesInPath(AddresStartText).Select(x => new Files(x));
 		ListFiles = new ObservableCollection<Files>(files);
-        Log.LogAdd(_pathDirectoryLog, DateTime.Now.ToString() + " => Запустили сканер, найдено: " + ListFiles.Count + " файлов.");
+        Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Запустили сканер, найдено: " + ListFiles.Count + " файлов.");
 
         var filesCheckBox = ServiceFiles.GetFilesInPath(AddresStartText).Select(x => new Extentions(x))
 			.GroupBy(x => x.CheckExtension).Select(c => c.First());
         ListCeckboxs = new ObservableCollection<Extentions>(filesCheckBox);
-        Log.LogAdd(_pathDirectoryLog, DateTime.Now.ToString() + " => Запустили сканер, найдено: " + ListCeckboxs.Count + " расширений.");
+        Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Запустили сканер, найдено: " + ListCeckboxs.Count + " расширений.");
     }
 
     // Обработчик перемещения файлов
@@ -88,7 +88,7 @@ public partial class DashboardViewModel : ObservableObject
 		foreach(var item in ListFiles.Where(x => x.EnableExtension && x.StartAddres != null))
 		{
 			File.Move(item.StartAddres, AddresEndText + item.Name);
-            Log.LogAdd(_pathDirectoryLog, DateTime.Now.ToString() + " => Перемещение файла: **" + item.StartAddres + "** по пути **" + AddresEndText  + "** Успешно.");
+            Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Перемещение файла: **" + item.StartAddres + "** по пути **" + AddresEndText  + "** Успешно.");
         }
         OnScanFiles();
 	}
@@ -104,7 +104,7 @@ public partial class DashboardViewModel : ObservableObject
                 File.Delete(item.StartAddres);
 			else
                 FileSystem.DeleteFile(item.StartAddres, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-            Log.LogAdd(_pathDirectoryLog, DateTime.Now.ToString() + " => Удаление файла: **" + item.StartAddres + "** С настройкой удаления - " + SettingsViewModel.GetSetting() + "** Успешно.");
+            Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Удаление файла: **" + item.StartAddres + "** С настройкой удаления - " + SettingsViewModel.GetSetting() + "** Успешно.");
         }
         OnScanFiles();
 	}
@@ -138,8 +138,8 @@ public partial class DashboardViewModel : ObservableObject
 	public void WorkPreraration()
 	{
 		Directory.CreateDirectory(AddresEndText);
-		Directory.CreateDirectory(_pathDirectoryLog);
-		Log.LogCreate(_pathDirectoryLog);
+		Directory.CreateDirectory(PathDirectoryLog);
+		Log.LogCreate(PathDirectoryLog);
 	}
     #endregion
 }

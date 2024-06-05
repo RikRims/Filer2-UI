@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Text;
 
 namespace Filer2_UI.Services;
 public class Log
@@ -17,6 +16,14 @@ public class Log
         using(StreamWriter fs = new StreamWriter(path + "\\Log.log", true))
         {
             fs.WriteLine(textAdd);
+        }
+    }
+
+    public static string GetLog(string path) 
+    {
+        using(StreamReader fs = new StreamReader(path + "\\Log.log"))
+        {
+           return fs.ReadToEnd();
         }
     }
 }
