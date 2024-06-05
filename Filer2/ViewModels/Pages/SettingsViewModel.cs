@@ -25,6 +25,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 	[ObservableProperty]
     private Wpf.Ui.Appearance.ThemeType _currentTheme = Unknown;
 
+	[ObservableProperty]
+	private bool _currentThemeBool = false;
+
 	public void OnNavigatedTo()
 	{
 		if(!_isInitialized)
@@ -47,28 +50,52 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
 	public static string GetAssemblyName() => GetExecutingAssembly().GetName().Name?.ToString() ?? String.Empty;
 
+    //private void OnChangeTheme(string parameter)
+    //{
+    //	switch(parameter)
+    //	{
+    //		case "theme_light":
+    //			if(CurrentTheme == Light)
+    //				break;
+
+    //               Apply(Light);
+    //			CurrentTheme = Light;
+
+    //			break;
+
+    //		default:
+    //			if(CurrentTheme == Dark)
+    //				break;
+
+    //               Apply(Dark);
+    //			CurrentTheme = Dark;
+
+    //			break;
+    //	}
+    //}
+
     [RelayCommand]
-	private void OnChangeTheme(string parameter)
-	{
-		switch(parameter)
-		{
-			case "theme_light":
-				if(CurrentTheme == Light)
-					break;
+    private void OnChangeTheme()
+    {
+        switch(CurrentThemeBool)
+        {
+            case true:
+                if(CurrentTheme == Light)
+                    break;
 
                 Apply(Light);
-				CurrentTheme = Light;
+                CurrentTheme = Light;
 
-				break;
+                break;
 
-			default:
-				if(CurrentTheme == Dark)
-					break;
+            default:
+                if(CurrentTheme == Dark)
+                    break;
 
                 Apply(Dark);
-				CurrentTheme = Dark;
+                CurrentTheme = Dark;
 
-				break;
-		}
-	}
+                break;
+        }
+    }
 }
