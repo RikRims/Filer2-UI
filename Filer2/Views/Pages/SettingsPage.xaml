@@ -39,11 +39,11 @@
 		<StackPanel HorizontalAlignment="Left">
 		<TextBlock Margin="0,12" Text="Игнор сканирования" FontSize="18" FontWeight="DemiBold"/>
 		<TextBlock Margin="0,12" Text="Старше какого числа дней должны быть файлы?"/>
-		<ui:TextBox Margin="5"/>
+			<ui:TextBox Margin="5" MaxLength="2" Text="{Binding ViewModel.CountDeys}"/>
 		</StackPanel>
 
 		<Border BorderBrush="{DynamicResource TextFillColorPrimaryBrush}" BorderThickness="1"/>
-		
-		<TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+
+		<TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}"/>
 	</StackPanel>
 </Page>

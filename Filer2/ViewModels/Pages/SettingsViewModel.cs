@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Reflection.Metadata;
 using Wpf.Ui.Controls;
 using static System.Reflection.Assembly;
 using static Wpf.Ui.Appearance.Theme;
@@ -11,24 +12,41 @@ using static Wpf.Ui.Appearance.ThemeType;
 namespace Filer2_UI.ViewModels.Pages;
 public partial class SettingsViewModel : ObservableObject, INavigationAware
 {
-	private bool _isInitialized = false;
+    #region Поля
+    private bool _isInitialized = false;
 
-	[ObservableProperty]
-	private string _appVersion = String.Empty;
+    [ObservableProperty]
+    private string _appVersion = String.Empty;
 
-	[ObservableProperty]
-	private string _appName = String.Empty;
+    [ObservableProperty]
+    private string _appName = String.Empty;
 
-	[ObservableProperty]
-	private static bool _deleted = false;
+    [ObservableProperty]
+    private static bool _deleted = false;
 
-	[ObservableProperty]
+    [ObservableProperty]
     private Wpf.Ui.Appearance.ThemeType _currentTheme = Unknown;
 
-	[ObservableProperty]
-	private bool _currentThemeBool = false;
+    [ObservableProperty]
+    private bool _currentThemeBool = false;
 
-	public void OnNavigatedTo()
+    private string _countDeys = "";
+    public string CountDeys
+    {
+        get => _countDeys;
+        set
+        {
+            if(int.TryParse(value, out int i))
+            {
+                SetProperty(ref _countDeys, value);
+            }
+            else
+                _countDeys = String.Empty;
+        }
+    }
+    #endregion
+
+    public void OnNavigatedTo()
 	{
 		if(!_isInitialized)
 			InitializeViewModel();
@@ -50,29 +68,15 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
 	public static string GetAssemblyName() => GetExecutingAssembly().GetName().Name?.ToString() ?? String.Empty;
 
-    //private void OnChangeTheme(string parameter)
-    //{
-    //	switch(parameter)
-    //	{
-    //		case "theme_light":
-    //			if(CurrentTheme == Light)
-    //				break;
+    [RelayCommand]
+    private void SetCountDeys(string parametr)
+    {
+        if(int.TryParse(parametr, out int i))
+        { 
 
-    //               Apply(Light);
-    //			CurrentTheme = Light;
-
-    //			break;
-
-    //		default:
-    //			if(CurrentTheme == Dark)
-    //				break;
-
-    //               Apply(Dark);
-    //			CurrentTheme = Dark;
-
-    //			break;
-    //	}
-    //}
+        }
+        else parametr = String.Empty;
+    }
 
     [RelayCommand]
     private void OnChangeTheme()
