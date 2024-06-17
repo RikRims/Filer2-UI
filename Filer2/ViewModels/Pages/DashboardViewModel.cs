@@ -32,20 +32,32 @@ public partial class DashboardViewModel : ObservableObject
     #endregion
 
     #region Команды
-	// Установка начальной папки
-	[RelayCommand]
-	private void OnAddAddresStart()
-	{
-		AddresStartText = CompleteField(); //TODO обработать возврат пустой строки
-		Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Поменяли -AddresStartText- на : " + AddresStartText);
-	}
+    // Установка начальной папки
+    [RelayCommand]
+    private void OnAddAddresStart()
+    {
+        string? tempAddresStartText = CompleteField();
+        if(tempAddresStartText != "")
+        {
+            AddresStartText = tempAddresStartText;
+            Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Поменяли -AddresStartText- на : " + AddresStartText);
+        }
+        else
+			Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Не поменяли -AddresStartText-");
+    }
 
 	// Установка конечной папки
 	[RelayCommand]
 	private void OnAddAddresEnd()
 	{
-		AddresEndText = CompleteField(); //TODO обработать возврат пустой строки
-        Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Поменяли -AddresEndText- на : " + AddresEndText);
+		string? tempAddresEndText = CompleteField();
+		if(tempAddresEndText != "")
+		{
+			AddresEndText = tempAddresEndText;
+			Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Поменяли -AddresEndText- на : " + AddresEndText);
+		}
+        else
+            Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Не поменяли -AddresEndText-");
     }
 
 	// Обработчик выбора всех файлов
