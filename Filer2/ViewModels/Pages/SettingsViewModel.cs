@@ -31,7 +31,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private bool _currentThemeBool = false;
 
     [ObservableProperty]
-    private DateTime _countDeys = DateTime.Now;
+    private static DateTime _countDeys = DateTime.Now;
    
     #endregion
 
@@ -52,8 +52,10 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 	}
 
 	public static bool GetSetting() => _deleted;
-	
-	private string GetAssemblyVersion() => GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
+
+    public static DateTime GetDate() => _countDeys;
+
+    private string GetAssemblyVersion() => GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
 
 	public static string GetAssemblyName() => GetExecutingAssembly().GetName().Name?.ToString() ?? String.Empty;
 

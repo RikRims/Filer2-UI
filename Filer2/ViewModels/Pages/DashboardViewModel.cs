@@ -74,7 +74,7 @@ public partial class DashboardViewModel : ObservableObject
 	{
 		var files = ServiceFiles.GetFilesInPath(AddresStartText).Select(x => new Files(x));
 		ListFiles = new ObservableCollection<Files>(files);
-        Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Запустили сканер, найдено: " + ListFiles.Count + " файлов.");
+		Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Запустили сканер, найдено: " + ListFiles.Count + " файлов.");
 
         var filesCheckBox = ServiceFiles.GetFilesInPath(AddresStartText).Select(x => new Extentions(x))
 			.GroupBy(x => x.CheckExtension).Select(c => c.First());

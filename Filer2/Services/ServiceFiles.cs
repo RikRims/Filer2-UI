@@ -1,4 +1,7 @@
 ﻿using System.IO;
+using Filer2_UI.Models;
+using Filer2_UI.ViewModels.Pages;
+using static System.Net.WebRequestMethods;
 
 namespace Filer2_UI.Services;
 public class ServiceFiles
@@ -12,8 +15,20 @@ public class ServiceFiles
     });
     #endregion
 
-    public static IEnumerable<string> GetFilesInPath(string AddresStartText) 
-    { 
-        return Directory.GetFiles(AddresStartText, "*.*").Where(file => !_block.Any<string>((extension) => file.EndsWith(extension, StringComparison.CurrentCultureIgnoreCase)));
+    public static IEnumerable<string> GetFilesInPath(string AddresStartText)
+    {
+        var GetDate = SettingsViewModel.GetDate();
+        var File = Directory.GetFiles(AddresStartText, "*.*").Where(file => !_block.Any<string>((extension) => file.EndsWith(extension, StringComparison.CurrentCultureIgnoreCase)));
+        List<string> EndFile = new();
+        
+        foreach(var f in File)
+        {
+            FileInfo fileInfo = new(f);
+            if (fileInfo.LastWriteTime < GetDate)
+            {
+                EndFile.Add(f);
+            }
+        }
+        return EndFile;
     }
 }
