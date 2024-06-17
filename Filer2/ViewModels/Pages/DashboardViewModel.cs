@@ -7,6 +7,8 @@ using System.IO;
 using Filer2_UI.Models;
 using Filer2_UI.Services;
 using Microsoft.VisualBasic.FileIO;
+using MessageBox = System.Windows.Forms.MessageBox;
+
 
 namespace Filer2_UI.ViewModels.Pages;
 
@@ -101,10 +103,23 @@ public partial class DashboardViewModel : ObservableObject
 		foreach(var item in ListFiles.Where(x => x.EnableExtension && x.StartAddres != null))
         {
             if(SettingsViewModel.GetSetting())
-                File.Delete(item.StartAddres);
-			else
+            {
+                DialogResult dialogResult = MessageBox.Show(
+                "Точно, удалить файлы полностью? Если нет поменяйте настройку.",
+                "Удаление!", MessageBoxButtons.YesNo);
+                if(dialogResult == DialogResult.Yes)
+                {
+                    File.Delete(item.StartAddres);
+                    Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Удаление файла: **" + item.StartAddres + "** С настройкой удаления - " + SettingsViewModel.GetSetting() + "** Успешно.");
+                }
+				else
+                    Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Удаление файла: **" + item.StartAddres + "** С настройкой удаления - " + SettingsViewModel.GetSetting() + "** Отменено.");
+            }
+            else
+            {
                 FileSystem.DeleteFile(item.StartAddres, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-            Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Удаление файла: **" + item.StartAddres + "** С настройкой удаления - " + SettingsViewModel.GetSetting() + "** Успешно.");
+                Log.LogAdd(PathDirectoryLog, DateTime.Now.ToString() + " => Удаление файла: **" + item.StartAddres + "** С настройкой удаления - " + SettingsViewModel.GetSetting() + "** Успешно.");
+            }
         }
         OnScanFiles();
 	}

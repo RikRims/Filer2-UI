@@ -30,20 +30,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     [ObservableProperty]
     private bool _currentThemeBool = false;
 
-    private string _countDeys = "";
-    public string CountDeys
-    {
-        get => _countDeys;
-        set
-        {
-            if(int.TryParse(value, out int i))
-            {
-                SetProperty(ref _countDeys, value);
-            }
-            else
-                _countDeys = String.Empty;
-        }
-    }
+    [ObservableProperty]
+    private DateTime _countDeys = DateTime.Now;
+   
     #endregion
 
     public void OnNavigatedTo()

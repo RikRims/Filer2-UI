@@ -36,10 +36,10 @@
             Content="Удалять насмерть!" Margin="0,5,5,5" IsChecked="{Binding ViewModel.Deleted}"/>
 		<Border BorderBrush="{DynamicResource TextFillColorPrimaryBrush}" BorderThickness="1"/>
 
-		<StackPanel HorizontalAlignment="Left">
-		<TextBlock Margin="0,12" Text="Игнор сканирования" FontSize="18" FontWeight="DemiBold"/>
-		<TextBlock Margin="0,12" Text="Старше какого числа дней должны быть файлы?"/>
-			<ui:TextBox Margin="5" MaxLength="2" Text="{Binding ViewModel.CountDeys}"/>
+		<StackPanel>
+			<TextBlock Margin="0,12" Text="ДАТА" FontSize="18" FontWeight="DemiBold"/>
+			<DatePicker Margin="5" HorizontalAlignment="Left" MaxWidth="200" SelectedDate="{Binding ViewModel.CountDeys}"/>
+			<TextBlock Margin="0,12" Text="Файлы, созданные после указанной даты, игнорируются при сканировании."/>
 		</StackPanel>
 
 		<Border BorderBrush="{DynamicResource TextFillColorPrimaryBrush}" BorderThickness="1"/>
