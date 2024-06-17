@@ -16,7 +16,8 @@ public partial class DataViewModel : ObservableObject, INavigationAware
 
 	public void OnNavigatedTo()
 	{
-		if(!_isInitialized)
+        LogText = Log.GetLog(DashboardViewModel.PathDirectoryLog);
+        if(!_isInitialized)
 			InitializeViewModel();
 	}
 
@@ -24,8 +25,6 @@ public partial class DataViewModel : ObservableObject, INavigationAware
 
 	private void InitializeViewModel()
 	{
-		LogText = Log.GetLog(DashboardViewModel.PathDirectoryLog);
-		
 		_isInitialized = true;
 	}
 }
