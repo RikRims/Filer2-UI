@@ -20,7 +20,14 @@ public partial class Extentions : ObservableObject
     
     public Extentions(string pathName)
     {
-        CheckExtension = $"{pathName[pathName.LastIndexOf(".")..]}";
+        try
+        {
+            CheckExtension = $"{pathName[pathName.LastIndexOf(".")..]}";
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            CheckExtension = $".Пустой";
+        }
     }
 }
 

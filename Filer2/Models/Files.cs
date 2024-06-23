@@ -29,7 +29,14 @@ public class Files : Extentions
     {
         Name = $"{pathName[pathName.LastIndexOf("\\")..]}";
         StartAddres = pathName;
-        CheckExtension = $"{pathName[pathName.LastIndexOf(".")..]}";
+        try
+        {
+            CheckExtension = $"{pathName[pathName.LastIndexOf(".")..]}";
+        }
+        catch(ArgumentOutOfRangeException)
+        {
+            CheckExtension = $".Пустой";
+        };
         Img = Icon.ExtractAssociatedIcon(pathName);
     }
 }
